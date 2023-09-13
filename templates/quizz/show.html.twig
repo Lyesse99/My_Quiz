@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello QuizzController!{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>{{ categorie.name }}</h1>
+
+        <div class="row">
+            <form action="{{ path('show_quizz', {'categorie': categorie.id}) }}" method="post">
+                {% for question in categorie.questions %}
+                    <div class="col-md-12">
+
+                       <div class="label">{{ question.question }}</div>
+
+                        {% for reponse in question.reponses %}
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="{{ reponse.question.id }}" id="question_{{ reponse.id }}" value="{{ reponse.id }}">
+                                <label class="form-check-label" for="question_{{ reponse.id }}">{{ reponse.reponse }}</label>
+                            </div>
+                        {% endfor %}
+                        <hr>
+
+                    </div>
+                {% endfor %}
+
+                <input type="submit" class="btn btn-grad">
+            </form>
+
+        </div>
+    </div>
+{% endblock %}
